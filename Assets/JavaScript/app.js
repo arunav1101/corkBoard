@@ -9,27 +9,47 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var event = firebase.database().ref('Event');
-var userName; //set player username
-var user = firebase.database().ref(userName);
+// Global variables init empty to be stored by user
+var eventName;
+var userName;
+
+
+// for creating event
+var event = firebase.database().ref('Events/' + eventName); 
+
+
+// for saving event for users
+var user = firebase.database().ref('Users/' + userName + eventName);
 
 
 // add event details
-event.set({
-  Description: 'val',
-  Start: 'time',
-  Expire: 'time',
-  zipcode: 'zip',
-  admin: userName
-});
+$('#create-event-button').on('click', function() {
+  // store event name in global variable
+  eventName = $('#event-name').text().trim();
+    event.set({
+      Name: 'Name of Event',
+      Description: 'val',
+      Start: 'time',
+      Expire: 'time',
+      Zipcode: 'zip',
+      Admin: userName
+    });
+})
+
 
 
 // create stored events
-user.set({
-  Event: {
-    name: 'event name',
-    start: 'time',
-    expire: 'time',
-    description: 'string'
-  },
-});
+$('#save-event-button').on('click', function() {
+  // userName needs to be stored on login
+
+  // store event name in global variable
+  eventName = $('#event-name').text().trim();
+  user.set({
+    Name: 'event name',
+    Start: 'time',
+    Expire: 'time',
+    Description: 'string',
+    Zipcode: 'zip'
+  });
+})
+
