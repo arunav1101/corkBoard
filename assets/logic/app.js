@@ -1,8 +1,8 @@
 'use strict';
 
 // added cyper text
-let token = 'dGJKSzk2NW9LYmFDSW9LeDFIcGVQcFNlM2gxMmtI';
-let key = 'OGFkZGIwNTdiYW1zaDljY2Q1NWRjNDYyZjRmNHAxMjM3ZDZqc244ZWQ5MzBhNDNkYTk';
+let newToken = 'TFZtRGs5MjNSY0hEdjdoZDgwdFc4RjBQNU9ZU2ZBbHo';
+let newUrl = `https://app.ticketmaster.com/discovery/v2/events?apikey=${atob(newToken)}&size=2`
 
 let dataStore = {
     startDate: null,
@@ -12,32 +12,29 @@ let dataStore = {
 }
 
 $(`#searchBtn`).on("click", function () {
-    let searchCriteria = 'community';
-    let url = "https://predicthq.p.rapidapi.com/v1/events/?category=" + searchCriteria + "&offset=10";
+    let searchCriteria = $('#landing-inp').val();
+    let url = newUrl + "&keyword=" + searchCriteria;
     let method = "GET";
 
     $.ajax({
         url,
-        method,
-        headers: {
-            "authorization": `Bearer ${atob(token)}`,
-            "x-rapidapi-key": `${atob(key)}`
-        }
+        method
     }).then((response) => {
-        if (!response.results.length) {
+        if (!response._embedded.events.length) {
             alert('No record found')
             return;
         }
-        console.log(response.results);
-        response.results.map(event => {
-            dataStore.startDate = event.start;
-            dataStore.endDate = event.end;
-            dataStore.name = event.title;
-            dataStore.description = event.description;
+        console.log(response._embedded.events);
+        response._embedded.events.map(event => {
+            dataStore.startDate = event.dates.start.localDate;
+            dataStore.endDate = event.sales.public.endDateTime;
+            dataStore.name = event.name;
+            dataStore.description = event.name;
             console.log(dataStore);
         })
     });
 });
+
 // Logic to get location
 
 function getLocation() {
@@ -48,33 +45,33 @@ function getLocation() {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
+
 function showPosition(position) {
     var x = document.getElementById("location");
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
     var latlon = position.coords.latitude + "," + position.coords.longitude;
 
-
     $.ajax({
-      type:"GET",
-      url:"https://app.ticketmaster.com/discovery/v2/events?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=2&latlong="+latlon,
-      async:true,
-      dataType: "json",
-      success: function(json) {
-                  console.log(json);
-                  var e = document.getElementById("events");
-                  e.innerHTML = json.page.totalElements + " events found.";
-                  showEvents(json);
-               },
-      error: function(xhr, status, err) {
-                  console.log(err);
-               }
+        type: "GET",
+        url: `${newUrl}&latlong=${latlon}`,
+        async: true,
+        dataType: "json",
+        success: function (json) {
+            console.log(json);
+            var e = document.getElementById("events");
+            e.innerHTML = json.page.totalElements + " events found.";
+            showEvents(json);
+        },
+        error: function (xhr, status, err) {
+            console.log(err);
+        }
     });
 
 }
 
 function showError(error) {
-    switch(error.code) {
+    switch (error.code) {
         case error.PERMISSION_DENIED:
             x.innerHTML = "User denied the request for Geolocation."
             break;
@@ -92,9 +89,9 @@ function showError(error) {
 
 
 function showEvents(json) {
-  for(var i=0; i<json.page.size; i++) {
-    $("#events").append("<p>"+json._embedded.events[i].name+"</p>");
-  }
+    for (var i = 0; i < json.page.size; i++) {
+        $("#events").append("<p>" + json._embedded.events[i].name + "</p>");
+    }
 }
 
 
