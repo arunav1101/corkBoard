@@ -13,7 +13,7 @@ let dataStore = {
 
 $(`#searchBtn`).on("click", function () {
     let searchCriteria = $('#landing-inp').val();
-    let url = newUrl + "&keyword=" + searchCriteria;
+    let url = newUrl + "stateCode=OR&keyword=" + searchCriteria;
     let method = "GET";
 
     $.ajax({
