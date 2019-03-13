@@ -13,8 +13,10 @@ $(function(){
 
    let newEventName = "";
    let newEventLocation = "";
-   let newEventDate = "";
-   let newEventTime = "";
+   let newEventStartDate = "";
+   let newEventStartTime = "";
+   let newEventEndDate = "";
+   let newEventEndTime = "";
    let newEventDescription = "";
    let userName= "user"
 
@@ -41,22 +43,22 @@ $(function(){
          Name: newEventName,
          Zipcode: newEventLocation,
          Start: newEventDate,
-         Expire: newEvent
+         Expire: newEvent,
          StartTime: newEventTime,
          Description: newEventDescription,
          DateAdded: firebase.database.ServerValue.TIMESTAMP,
-         Admin: userName
+         Username: userName
 
       });
     });
 
    database.on("child_added", function(childSnapshot) {
 
-      console.log(childSnapshot.val().name);
-      console.log(childSnapshot.val().location);
-      console.log(childSnapshot.val().date);
-      console.log(childSnapshot.val().time);
-      console.log(childSnapshot.val().description);
+      console.log(childSnapshot.val().Name);
+      console.log(childSnapshot.val().Zipcode);
+      console.log(childSnapshot.val().Start);
+      console.log(childSnapshot.val().Expire);
+      console.log(childSnapshot.val().Description);
 
    });
 
@@ -64,11 +66,11 @@ $(function(){
       
       let newEventCard = $("<card>");
 
-      let cardName = $("<h3>").text(snapshot.val().name);
-      let cardLocation = $("<h4>").text(snapshot.val().location);
-      let cardDate = $("<h4>").text(snapshot.val().date);
-      let cardTime = $("<h4>").text(snapshot.val().time);
-      let cardDescription = $("<h4>").text(snapshot.val().description);
+      let cardName = $("<h3>").text(snapshot.val().Name);
+      let cardLocation = $("<h4>").text(snapshot.val().Zipcode);
+      let cardDate = $("<h4>").text(snapshot.val().Start);
+      let cardTime = $("<h4>").text(snapshot.val().Expire);
+      let cardDescription = $("<h4>").text(snapshot.val().Description);
 
       newEventCard.append(cardName, cardLocation, cardDate, cardTime, cardDescription);
       $("#created-events-here").append(newEventCard);

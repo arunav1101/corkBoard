@@ -3,46 +3,54 @@
 <html>
     <head>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">   
+      <link rel="stylesheet" href="assets/css/style.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="create-event.js"></script>
+      <script src="assets/logic/create-event.js"></script>
     </head>
 
     <body id="add-event-body">
-      <div class="row">
-        <div class='card col-lg-6' id="add-event-form">    
-            <form>    
-                <div class="card-header">Add Event</div>
-                <div class="form-group"> 
-                  <label for="event-name">Event Name</label>
-                  <input type="text" class="input" id="event-name-input"  placeholder="type here">
-                </div>
-                <div class="form-group">
-                  <label for="event-location">Event Location (Zip Code)</label>
-                  <input type="text" class="input" id="event-location-input" placeholder="type here">
-                </div>
-                <div class="form-group">
-                    <label for="event-date">Event Date Start</label>
-                    <input type="date" class="input" id="event-date-start-input">
-                </div>
-                <div class="form-group">
-                    <label for="event-time">Event Time Start</label>
-                    <input type="time" class="input" id="event-time-start-input">
-                  </div>
-                <div class="form-group">
-                    <label for="event-date">Event Date End</label>
-                    <input type="date" class="input" id="event-date-end-input">
-                </div>
-                <div class="form-group">
-                  <label for="event-time">Event Time End</label>
-                  <input type="time" class="input" id="event-time-end-input">
-                </div>
-                <div class="form-group">
-                  <label for="description">Description</label>
-                  <input type="text" class="input" id="event-description-input">
-                </div>
-                <button type="submit" class="btn btn-primary" id="create-event">Create Event</button>
-            </form>
-        </div>    
+        <video autoplay muted loop id="backgroundVideo">
+            <source src="assets/videos/Quarter-Ferris.mp4" type="video/mp4">
+        </video>
+        <div class="content row">
+            <div class="container">
+                <div class='card col-lg-6 jumbotron' id="add-event-form">
+                    <div class="search form">   
+                    <form>    
+                        <div class="card-header">Add Event</div>
+                        <div class="form-group"> 
+                          <label for="event-name">Event Name</label>
+                          <input type="text" class="input" id="event-name-input"  placeholder="type here">
+                        </div>
+                        <div class="form-group">
+                          <label for="event-location">Event Location (Zip Code)</label>
+                          <input type="text" class="input" id="event-location-input" placeholder="type here">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-date">Event Date Start</label>
+                            <input type="date" class="input" id="event-date-start-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="event-time">Event Time Start</label>
+                            <input type="time" class="input" id="event-time-start-input">
+                          </div>
+                        <div class="form-group">
+                            <label for="event-date">Event Date End</label>
+                            <input type="date" class="input" id="event-date-end-input">
+                        </div>
+                        <div class="form-group">
+                          <label for="event-time">Event Time End</label>
+                          <input type="time" class="input" id="event-time-end-input">
+                        </div>
+                        <div class="form-group">
+                          <label for="description">Description</label>
+                          <input type="text" class="input" id="event-description-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="create-event-button">Create Event</button>
+                    </form>
+                </div>    
+            </div>
+        </div>
       </div>
       <br>
         <div id="created-events" class="col-lg-6"></div>
@@ -55,6 +63,4 @@
             </div>
           </div>
         
-        <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
-    </body>
-</html>
+          <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script></html>
