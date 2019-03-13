@@ -45,7 +45,7 @@ $(function(){
          StartTime: newEventTime,
          Description: newEventDescription,
          DateAdded: firebase.database.ServerValue.TIMESTAMP,
-         Username: userName
+         Admin: userName
 
       });
     });
