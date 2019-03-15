@@ -1,24 +1,22 @@
 $(function(){
 
-    var config = {
-        apiKey: "AIzaSyBbdB0Z13saO2C5CbwRn6sNvyR9jFuYrtA",
-        authDomain: "eventsearch-9871b.firebaseapp.com",
-        databaseURL: "https://eventsearch-9871b.firebaseio.com",
-        projectId: "eventsearch-9871b",
-        storageBucket: "eventsearch-9871b.appspot.com",
-        messagingSenderId: "329903550973"
-      };
+    let config = {
+       apiKey: "AIzaSyBbdB0Z13saO2C5CbwRn6sNvyR9jFuYrtA",
+       authDomain: "eventsearch-9871b.firebaseapp.com",
+       databaseURL: "https://eventsearch-9871b.firebaseio.com",
+       projectId: "eventsearch-9871b",
+       storageBucket: "eventsearch-9871b.appspot.com",
+       messagingSenderId: "329903550973"
+     };
  
     firebase.initializeApp(config);
  
     let newEventName = "";
     let newEventLocation = "";
-    let newEventStartDate = "";
-    let newEventStartTime = "";
-    let newEventEndDate = "";
-    let newEventEndTime = "";
+    let newEventDate = "";
+    let newEventTime = "";
     let newEventDescription = "";
-    let userName= "user";
+    let userName= "user"
  
     let database = firebase.database().ref('Events/'+newEventName);
  
